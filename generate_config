@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#Mesos Support
+HUB_HOST=null
+if [ -n "$HOST" ]; then
+  HUB_HOST=\"$HOST\"
+fi
+
+if [ -n "$PORT0" ]; then
+  HUB_PORT=$PORT0
+fi
+
+#Config Parameter
+if [ -z "$HUB_PORT" ]; then
+  HUB_PORT=4444
+fi
+
+echo "
+{
+  \"host\": $HUB_HOST,
+  \"port\": $HUB_PORT,
+  \"prioritizer\": null,
+  \"capabilityMatcher\": \"org.openqa.grid.internal.utils.DefaultCapabilityMatcher\",
+  \"throwOnCapabilityNotPresent\": true,
+  \"newSessionWaitTimeout\": $GRID_NEW_SESSION_WAIT_TIMEOUT,
+  \"jettyMaxThreads\": $GRID_JETTY_MAX_THREADS,
+  \"nodePolling\": $GRID_NODE_POLLING,
+  \"cleanUpCycle\": $GRID_CLEAN_UP_CYCLE,
+  \"timeout\": $GRID_TIMEOUT,
+  \"browserTimeout\": $GRID_BROWSER_TIMEOUT,
+  \"maxSession\": $GRID_MAX_SESSION,
+  \"unregisterIfStillDownAfter\": $GRID_UNREGISTER_IF_STILL_DOWN_AFTER
+}" 
